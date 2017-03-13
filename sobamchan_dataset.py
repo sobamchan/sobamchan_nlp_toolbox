@@ -26,6 +26,3 @@ class AGCorpus:
                 T.append(classes[category])
 
         return T, X
-
-if __name__ == '__main__':
-    ag = AGCorpus('/Users/sochan/project/NLP/datas/newsspace200.xml')
