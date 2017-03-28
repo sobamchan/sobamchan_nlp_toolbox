@@ -6,6 +6,28 @@ from jp_preprocess_lib.normalize_neologd import normalize_neologd
 from jp_preprocess_lib.detagger import TagStripper
 
 class Parser:
+    '''
+    ## functions
+    - html detagger
+    - Japanece tokenization
+    - Japanece stemming
+    - ngram tokenization
+
+    ## usage
+    parser = Parser(
+                pos=['名詞', '動詞'],
+                stemming=True,
+                normalize=True,
+                html_detag=True,
+                ngram=2
+                )
+    parser('私の趣味は日本語を話すことです。')
+    # -> [[['私', '趣味'], ['趣味', '日本語'], ['日本語', 'こと']]]
+    
+    # you also can pass parser a list of sentences
+    parser('私の趣味は日本語を話すことです。', '私の父は侍です。')
+    # -> [[['私', '趣味'], ['趣味', '日本語'], ['日本語', 'こと']], [['私', '父'], ['父', '侍']]]
+    '''
 
     def __init__(self, pos=None, stemming=False, normalize=True, html_detag=False, ngram=None):
         self.tagger = MeCab.Tagger('-Ochasen')
