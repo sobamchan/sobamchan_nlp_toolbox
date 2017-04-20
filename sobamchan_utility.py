@@ -53,6 +53,8 @@ class Utility(object):
 
     @staticmethod
     def separate_datasets(datasets, test_ratio=0.2):
+        # TODO
+        # pick one dateset shape
         train_ratio = 1.0 - test_ratio
         train = {}
         test = {}
@@ -80,3 +82,7 @@ class Utility(object):
             if filename.endswith(ext):
                 c += 1
         return c
+
+    @staticmethod
+    def separate_array(array, n):
+        return [array[x:x + n] for x in range(0, len(array), n)]
