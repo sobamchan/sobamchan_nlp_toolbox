@@ -3,7 +3,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-import sobamchan_utility
+from . import sobamchan_utility
 util = sobamchan_utility.Utility()
 
 class Log(object):
