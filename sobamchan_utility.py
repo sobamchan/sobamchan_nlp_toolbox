@@ -86,3 +86,14 @@ class Utility(object):
     @staticmethod
     def separate_array(array, n):
         return [array[x:x + n] for x in range(0, len(array), n)]
+
+    @staticmethod
+    def pad_to_max(array, max_len, n):
+        result = array
+        if len(array) > max_len:
+            result = array[:max_len]
+        elif len(array) < max_len:
+            pad_n = max_len - len(array)
+            result = array + [n] * pad_n
+
+        return result
