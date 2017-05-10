@@ -36,14 +36,13 @@ class Model(Chain):
         if gpu >= 0:
             cuda.get_device(gpu).use()
             self.to_gpu()
-            self.xp = chainer.cuda.cupy
-            return self.xp
-        self.xp = np
+            xp = chainer.cuda.cupy
+            return xp
         return np
 
     def get_xp(self):
         gpu = self.gpu
         if gpu < 0:
-            return self.xp
+            return chainer.cuda.cupy
         else:
-            return self.xp
+            return np
