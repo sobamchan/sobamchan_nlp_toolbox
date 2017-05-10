@@ -48,6 +48,14 @@ class Log(object):
         plt.savefig(filepath)
         plt.clf()
 
+    def load_data(self, fpath=''):
+        if fpath == '':
+            print('You need to set filepath to load data')
+        if 'json' not in fpath:
+            fpath = fpath + '.json'
+        self.values = util.load_json(fpath)
+        return self.values
+
 if __name__ == '__main__':
     import math
     log = Log()
