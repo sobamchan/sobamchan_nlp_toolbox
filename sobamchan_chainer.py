@@ -12,7 +12,6 @@ class Model(Chain):
         super(Model, self).__init__(**kwargs)
         
         self.gpu = -1
-        self.xp = np
 
     def save_model(self, filename='./model.model', data_format=None):
         path, ext = os.path.splitext(filename)
