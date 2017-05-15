@@ -13,12 +13,14 @@ class PreTrainedEmbedId(L.EmbedID):
     vocab: instance of sobamchan_vocabulary.Vocabulary
     '''
 
-    def __init__(self, in_size, out_size, vocab, binpath):
-        self.binpath = binpath
+    def __init__(self, in_size, out_size, vocab, fpath, binary):
+        self.fpath = fpath
         self.vocab = vocab
 
-        self._load_word_vectors()
-        initialW = self._build_initilW()
+        if binary:
+            initialW = self._build_initilW_binary()
+        else:
+            initialW = self._build_initilW()
 
         super(PreTrainedEmbedId, self).__init__(
                 in_size=in_size,
@@ -26,10 +28,9 @@ class PreTrainedEmbedId(L.EmbedID):
                 initialW=initialW
         )
 
-    def _load_word_vectors(self):
-        self.word_vectors = KeyedVectors.load_word2vec_format(self.binpath, binary=True)
 
-    def _build_initilW(self):
+    def _build_initilW_binary(self):
+        self.word_vectors = KeyedVectors.load_word2vec_format(self.fpath, binary=True)
         vocab = self.vocab
         word_vectors = self.word_vectors
         weight = []
@@ -46,10 +47,34 @@ class PreTrainedEmbedId(L.EmbedID):
 
         return weight
 
+    def _build_initilW(self):
+        fpath = self.fpath
+        vocab = self.vocab
+        word_vectors = {}
+        with open(fpath) as f:
+            lines = f.readlines()[1:]
+        ds = [line.split(' ') for line in lines]
+        words = [d[0] for d in ds]
+        vecs = [d[1:-1] for d in ds]
+        for word, vec in zip(words, vecs):
+            word_vectors[word] = [float(i) for i in vec]
+        weight = []
+        for wid in sorted(vocab.i2w.keys()):
+            word = vocab.i2w[wid]
+            # check if word exists in dict
+            if word not in word_vectors.keys():
+                word_vector = np.zeros(300)
+            else:
+                word_vector = word_vectors[word]
+            weight.append(word_vector)
+
+
 def test_PreTrainedEmbedId():
     vocab = Vocabulary()
-    binpath = '~/project/ML/NLP/datas/GoogleNews-vectors-negative300.bin'
+    fpath = '/Users/sochan/project/ML/NLP/datas/word2vec_text8.txt'
     words = ['dog', 'cat', 'cow', 'sheep', 'sobamchan']
     for word in words:
         vocab.new(word)
-    ptm = PreTrainedEmbedId(5, 300, vocab, binpath)
+    ptm = PreTrainedEmbedId(5, 300, vocab, fpath, False)
+
+test_PreTrainedEmbedId()
