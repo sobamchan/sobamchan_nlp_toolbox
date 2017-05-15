@@ -35,7 +35,11 @@ class PreTrainedEmbedId(L.EmbedID):
         weight = []
         for wid in sorted(vocab.i2w.keys()):
             word = vocab.i2w[wid]
-            word_vector = word_vectors[word]
+            # check if word exists in dict
+            if word not in word_vectors.index2word:
+                word_vector = np.zeros(300)
+            else:
+                word_vector = word_vectors[word]
             weight.append(word_vector)
         weight = np.array(weight).astype(np.float32)
         self.weight = weight
@@ -45,7 +49,7 @@ class PreTrainedEmbedId(L.EmbedID):
 def test_PreTrainedEmbedId():
     vocab = Vocabulary()
     binpath = '~/project/ML/NLP/datas/GoogleNews-vectors-negative300.bin'
-    words = ['dog', 'cat', 'cow', 'sheep']
+    words = ['dog', 'cat', 'cow', 'sheep', 'sobamchan']
     for word in words:
         vocab.new(word)
-    ptm = PreTrainedEmbedId(4, 300, vocab, binpath)
+    ptm = PreTrainedEmbedId(5, 300, vocab, binpath)
