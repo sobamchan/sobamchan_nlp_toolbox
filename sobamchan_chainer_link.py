@@ -77,4 +77,5 @@ def test_PreTrainedEmbedId():
         vocab.new(word)
     ptm = PreTrainedEmbedId(5, 300, vocab, fpath, False)
 
-test_PreTrainedEmbedId()
+if __name__ == '__main__':
+    test_PreTrainedEmbedId()
