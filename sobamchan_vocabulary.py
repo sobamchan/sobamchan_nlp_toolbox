@@ -27,3 +27,11 @@ class Vocabulary(object):
                 self.i2w[ind] = word
             self.counts[self.w2i[word]] += 1
             self.dataset.append(self.w2i[word])
+
+    def encode(self, line):
+        w2i = self.w2i
+        encoded_line = []
+        for word in line.strip().split():
+            encoded_line.append(w2i[word])
+
+        return encoded_line
