@@ -89,7 +89,7 @@ def train(model):
         for x, t in zip(test_x_iter, test_t_iter):
             model.cleargrads()
             x_n = len(x)
-            x = model.prepare_input(x, dtype=xp.float32, xp=xp)
+            x = model.prepare_input(x, dtype=xp.int32, xp=xp)
             t = model.prepare_input(t, dtype=xp.int32, xp=xp)
             loss, acc = model(x, t, train=False)
             loss_sum += loss.data * x_n
