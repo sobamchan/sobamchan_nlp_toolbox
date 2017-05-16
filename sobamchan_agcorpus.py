@@ -20,6 +20,7 @@ def get_args():
     parser.add_argument('--epoch', dest='epoch', default=1, type=int)
     parser.add_argument('--gpu', dest='gpu', default=-1, type=int)
     parser.add_argument('--output-dirname', dest='output_dirname', required=True)
+    parser.add_argument('--w2v-path', dest='w2v_path', required=True)
 
     return parser.parse_args()
 
@@ -31,6 +32,7 @@ def train(model):
     epoch = args.epoch
     gpu = args.gpu
     output_dirname = args.output_dirname
+    w2v_path = args.w2v_path
 
     ag = AgCorpus('./data/')
     train_t, train_data, test_t, test_data = ag.load_dataset()
@@ -49,7 +51,7 @@ def train(model):
     class_n = 4
     vocab_n = len(vocab)
     d = 300
-    fpath = '/Users/sochan/project/ML/NLP/datas/word2vec_text8.txt'
+    fpath = w2v_path
     model = model(class_n, vocab_n, d, vocab, fpath)
     xp = model.check_gpu(gpu)
     optimizer.setup(model)
