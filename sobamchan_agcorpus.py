@@ -106,5 +106,8 @@ def train(model):
         os.mkdir(output_path)
 
     train_loss_log.save('{}/train_loss_log'.format(output_path))
+    train_loss_log.save_graph('{}/train_loss_log'.format(output_path))
     test_loss_log.save('{}/test_loss_log'.format(output_path))
+    test_loss_log.save_graph('{}/test_loss_log'.format(output_path))
     test_acc_log.save('{}/test_acc_log'.format(output_path))
+    test_acc_log.save_graph('{}/test_acc_log'.format(output_path))
