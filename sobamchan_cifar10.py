@@ -21,7 +21,7 @@ def get_args():
 
     return parser.parse_args()
 
-def train(model):
+def train(opts):
 
     args = get_args()
 
@@ -30,8 +30,8 @@ def train(model):
     gpu = args.gpu
     output_dirname = args.output_dirname
 
-    optimizer = optimizers.AdaGrad()
-    model = model()
+    optimizer = opts['optimizer']
+    model = opts['model']()
     xp = model.check_gpu(gpu)
     optimizer.setup(model)
 
