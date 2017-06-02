@@ -2,7 +2,7 @@ import numpy as np
 import chainer.links as L
 from chainer import Variable
 
-from .sobamchan_vocabulary import Vocabulary
+from sobamchan_vocabulary import Vocabulary
 
 from gensim.models import KeyedVectors
 

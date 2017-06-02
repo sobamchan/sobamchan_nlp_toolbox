@@ -87,3 +87,66 @@ class AgCorpus:
         self.test_label = test_label
         self.test_data = test_data
         return train_label, train_data, test_label, test_data
+
+
+
+class MovieReview:
+
+    download_link = 'http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz'
+
+    def __init__(self, save_path):
+        self.save_path = save_path
+        self.tar_file_path = os.path.join(save_path, 'movie_review.tar.gz')
+        self.data_path = os.path.join(save_path, 'aclImdb')
+        self.train_path = os.path.join(self.data_path, 'train')
+        self.test_path = os.path.join(self.data_path, 'test')
+
+    def download(self):
+        dest_path = self.tar_file_path
+        if os.path.isfile(dest_path):
+            return
+        r = requests.get(self.download_link, stream=True)
+        with open(dest_path, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=1024):
+                if chunk:
+                    f.write(chunk)
+
+    def expand(self):
+        if os.path.isdir(self.data_path):
+            return
+        f = tarfile.open(self.tar_file_path)
+        f.extractall(self.save_path)
+        f.close()
+
+    def prepare(self):
+        self.download()
+        self.expand()
+
+    def _path_to_data(self, dpath):
+        fnames = os.listdir(dpath)
+        txt_fnames = [fname for fname in fnames if os.path.isfile(os.path.join(dpath, fname)) and fname.endswith('txt')]
+        texts = []
+        for txt_fname in txt_fnames:
+            fpath = os.path.join(dpath, txt_fname)
+            with open(fpath, 'r') as f:
+                t = f.read().lower()
+            texts.append(t)
+        return texts
+
+    def load_dataset(self):
+        self.prepare()
+        train_pos_path = os.path.join(self.train_path, 'pos')
+        train_neg_path = os.path.join(self.train_path, 'neg')
+        test_pos_path = os.path.join(self.test_path, 'pos')
+        test_neg_path = os.path.join(self.test_path, 'neg')
+        train_pos = self._path_to_data(train_pos_path)
+        train_neg = self._path_to_data(train_neg_path)
+        test_pos = self._path_to_data(test_neg_path)
+        test_neg = self._path_to_data(test_neg_path)
+
+        train_data = train_pos + train_neg
+        train_label = [1] * len(train_pos) + [0] * len(train_neg)
+        test_data = test_pos + test_neg
+        test_label = [1] * len(test_pos) + [0] * len(test_neg)
+
+        return train_label, train_data, test_label, test_data
