@@ -11,14 +11,14 @@ from tqdm import tqdm
 import argparse
 import os, sys
 
-from sobamchan_iterator import Iterator
-from sobamchan_log import Log
-from sobamchan_dataset import MovieReview
-from sobamchan_vocabulary import Vocabulary
-from sobamchan_utility import Utility
-from sobamchan_chainer import Model
-from sobamchan_chainer_link import PreTrainedEmbedId
-from sobamchan_vocabulary import Vocabulary
+from .sobamchan_iterator import Iterator
+from .sobamchan_log import Log
+from .sobamchan_dataset import MovieReview
+from .sobamchan_vocabulary import Vocabulary
+from .sobamchan_utility import Utility
+from .sobamchan_chainer import Model
+from .sobamchan_chainer_link import PreTrainedEmbedId
+from .sobamchan_vocabulary import Vocabulary
 util = Utility()
 
 
