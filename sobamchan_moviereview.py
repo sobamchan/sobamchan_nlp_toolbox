@@ -54,9 +54,9 @@ def train(opts):
         vocab.new(d)
 
     print('encoding')
-    train_x = np.array([util.pad_to_max(vocab.encode(td), 100, 0) for td in train_data])
+    train_x = np.array([util.pad_to_max(vocab.encode(td), 150, 0) for td in train_data])
     train_t = np.array(train_t)
-    test_x = np.array([util.pad_to_max(vocab.encode(td), 100, 0) for td in test_data])
+    test_x = np.array([util.pad_to_max(vocab.encode(td), 150, 0) for td in test_data])
     test_t = np.array(test_t)
 
     optimizer = opts['optimizer']
