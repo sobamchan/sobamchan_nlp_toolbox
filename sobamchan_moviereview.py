@@ -83,7 +83,7 @@ def train(opts):
         train_t_iter = Iterator(train_t, bs, order, shuffle=False)
 
         loss_sum = 0
-        for x, t in tqdm(zip(train_x_iter, train_t_iter), total=len(train_x)/bs):
+        for x, t in zip(train_x_iter, train_t_iter):
             model.cleargrads()
             x_n = len(x)
             x = model.prepare_input(x, dtype=xp.int32, xp=xp)
