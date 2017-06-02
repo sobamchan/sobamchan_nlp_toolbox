@@ -43,8 +43,8 @@ def train(opts):
     w2v_path = args.w2v_path
 
     print('loading dataset')
-    ag = MovieReview('./data/')
-    train_t, train_data, test_t, test_data = ag.load_dataset()
+    mr = MovieReview('./data/')
+    train_t, train_data, test_t, test_data = mr.load_dataset()
     train_n = len(train_t)
     test_n = len(test_t)
 
