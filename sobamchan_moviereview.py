@@ -96,6 +96,8 @@ def train(opts):
         loss_mean = float(loss_sum/train_n)
         train_loss_log.add(loss_mean)
         print('train loss: {}'.format(loss_mean))
+        del loss
+        del acc
 
         order = np.random.permutation(test_n)
         test_x_iter = Iterator(test_x, bs, order)
@@ -116,6 +118,8 @@ def train(opts):
         test_acc_log.add(acc_mean)
         print('test loss: {}'.format(loss_mean))
         print('test acc: {}'.format(acc_mean))
+        del loss
+        del acc
 
     output_path = './results/{}'.format(output_dirname)
     if not os.path.exists(output_path):
