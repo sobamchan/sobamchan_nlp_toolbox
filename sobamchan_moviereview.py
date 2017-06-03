@@ -97,7 +97,6 @@ def train(opts):
         train_loss_log.add(loss_mean)
         print('train loss: {}'.format(loss_mean))
         del loss
-        del acc
 
         order = np.random.permutation(test_n)
         test_x_iter = Iterator(test_x, bs, order)
