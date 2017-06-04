@@ -141,7 +141,7 @@ class MovieReview:
         test_neg_path = os.path.join(self.test_path, 'neg')
         train_pos = self._path_to_data(train_pos_path)
         train_neg = self._path_to_data(train_neg_path)
-        test_pos = self._path_to_data(test_neg_path)
+        test_pos = self._path_to_data(test_pos_path)
         test_neg = self._path_to_data(test_neg_path)
 
         train_data = train_pos + train_neg
