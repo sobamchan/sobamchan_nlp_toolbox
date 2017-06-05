@@ -25,8 +25,9 @@ class PreTrainedEmbedId(L.EmbedID):
         super(PreTrainedEmbedId, self).__init__(
                 in_size=in_size,
                 out_size=out_size,
-                initialW=initialW
+                # initialW=initialW
         )
+        self.W = initialW
 
 
     def _build_initilW_binary(self):
