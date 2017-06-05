@@ -1,4 +1,5 @@
 import collections
+import pickle
 from chainer.utils import walker_alias
 
 class Vocabulary(object):
@@ -35,3 +36,13 @@ class Vocabulary(object):
             encoded_line.append(w2i[word])
 
         return encoded_line
+
+    def save(self, fpath):
+        with open(fpath, 'wb') as f:
+            pickle.dump(self, f)
+
+    @staticmethod
+    def load(fpath):
+        with open(fpath, 'rb') as f:
+            vocab = pickle.load(f)
+        return vocab
