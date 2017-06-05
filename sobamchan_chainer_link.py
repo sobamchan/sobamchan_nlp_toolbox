@@ -68,6 +68,7 @@ class PreTrainedEmbedId(L.EmbedID):
             else:
                 word_vector = word_vectors[word]
             weight.append(word_vector)
+        weight = np.array(weight).astype(np.float32)
         return weight
 
 
