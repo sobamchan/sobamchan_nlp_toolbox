@@ -65,7 +65,7 @@ def train(opts):
     print('setting model up')
     class_n = 2
     vocab_n = len(vocab)
-    d = 300
+    d = 200
     fpath = w2v_path
     model = model(class_n, vocab_n, d, vocab, fpath)
     xp = model.check_gpu(gpu)
