@@ -67,6 +67,7 @@ class PreTrainedEmbedId(L.EmbedID):
             else:
                 word_vector = word_vectors[word]
             weight.append(word_vector)
+        return weight
 
 
 def test_PreTrainedEmbedId():
