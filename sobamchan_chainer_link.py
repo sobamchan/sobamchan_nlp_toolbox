@@ -27,7 +27,7 @@ class PreTrainedEmbedId(L.EmbedID):
                 out_size=out_size,
                 # initialW=initialW
         )
-        self.W = initialW
+        self.W = Variable(initialW)
 
 
     def _build_initilW_binary(self):
