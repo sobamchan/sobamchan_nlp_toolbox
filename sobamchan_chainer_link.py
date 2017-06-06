@@ -39,7 +39,7 @@ class PreTrainedEmbedId(L.EmbedID):
             word = vocab.i2w[wid]
             # check if word exists in dict
             if word not in word_vectors.index2word:
-                word_vector = np.zeros(300)
+                word_vector = np.zeros(200)
             else:
                 word_vector = word_vectors[word]
             weight.append(word_vector)
