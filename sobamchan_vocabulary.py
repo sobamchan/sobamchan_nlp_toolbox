@@ -33,6 +33,7 @@ class Vocabulary(object):
         w2i = self.w2i
         encoded_line = []
         for word in line.strip().split():
+            word = word.lower()
             encoded_line.append(w2i[word])
 
         return encoded_line
