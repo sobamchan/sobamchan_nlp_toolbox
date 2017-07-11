@@ -1,6 +1,5 @@
 import collections
 import pickle
-from chainer.utils import walker_alias
 
 class Vocabulary(object):
 
